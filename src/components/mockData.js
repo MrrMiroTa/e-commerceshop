@@ -1,0 +1,16 @@
+export const MOCK_PRODUCTS = [
+  { id: 1, name: "Premium Hoodie - Slate Grey", slug: "hoodie-grey", price: 89.99, category: "Apparel", stock: 15, description: "Our signature heavyweight hoodie, designed for comfort and durability. Features a brushed fleece interior and minimalist detailing.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+  { id: 2, name: "Minimalist Leather Wallet", slug: "wallet-leather", price: 49.50, category: "Accessories", stock: 5, description: "A sleek, bifold wallet crafted from vegetable-tanned Italian leather. Holds 6 cards and cash without the bulk.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+  { id: 3, name: "Ceramic Coffee Mug (Set of 2)", slug: "mug-ceramic", price: 29.00, category: "Home Goods", stock: 20, description: "A beautifully hand-glazed ceramic mug set with a comfortable, oversized handle. Perfect for your morning ritual.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+  { id: 4, name: "Travel Backpack - Utility Black", slug: "backpack-utility", price: 159.99, category: "Bags", stock: 8, description: "Water-resistant travel backpack with dedicated laptop sleeve and concealed pockets for security on the go.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+  { id: 5, name: "The Essential T-Shirt", slug: "tshirt-essential", price: 25.00, category: "Apparel", stock: 30, description: "Soft, breathable cotton in a perfect fit.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+  { id: 6, name: "Sleek Desk Lamp", slug: "lamp-desk", price: 79.99, category: "Home Goods", stock: 10, description: "Adjustable LED lamp with three brightness modes.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+  { id: 6, name: "Sleek Desk Lamp", slug: "lamp-desk", price: 79.99, category: "Home Goods", stock: 10, description: "Adjustable LED lamp with three brightness modes.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+  { id: 6, name: "Sleek Desk Lamp", slug: "lamp-desk", price: 79.99, category: "Home Goods", stock: 10, description: "Adjustable LED lamp with three brightness modes.", imageUrl: "https://x-shop-eight.vercel.app/_next/image?url=%2Fimg%2Fproducts%2Fshoe%2Fconverse-run-star-motion-hi%2F1.jpg&w=3840&q=75" },
+];
+
+export const MOCK_TESTIMONIALS = [
+    { id: 1, text: "The quality is unmatched. My hoodie arrived quickly and feels like it will last for years!", author: "Sarah L.", rating: 5 },
+    { id: 2, text: "Customer service was fantastic, and the wallet is exactly as described—minimal and high-end.", author: "Mark R.", rating: 5 },
+    { id: 3, text: "Love the coffee mugs! They are the perfect size and look great in my kitchen.", author: "Jessica H.", rating: 4 },
+];

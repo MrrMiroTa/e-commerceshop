@@ -40,7 +40,7 @@ const getProduct = async (productId) => {
     throw new Error('No authentication token found');
   }
 
-  console.log('Fetching product with ID:', productId); // Debug log
+  // console.log('Fetching product with ID:', productId); // Debug log
 
   const response = await fetch(`${API_BASE_URL}/api/products/${productId}`, {
     headers: {

@@ -21,10 +21,10 @@ const ProductPage = () => {
                  setLoading(true);
                  setError('');
                  const result = await getProduct(id);
-                 console.log('Product API result:', result); // Debug log
-                 console.log('Result status:', result.status); // Debug log
-                 console.log('Result data:', result.data); // Debug log
-                 console.log('Result product:', result.product); // Debug log
+                //  console.log('Product API result:', result); // Debug log
+                //  console.log('Result status:', result.status); // Debug log
+                //  console.log('Result data:', result.data); // Debug log
+                //  console.log('Result product:', result.product); // Debug log
 
                  if (result.status === 'success' && (result.data || result.product)) {
                      const productInfo = result.data || result.product;
@@ -34,7 +34,7 @@ const ProductPage = () => {
                          stock: productInfo.stock || 10, // Add default stock if not provided
                          imageUrl: productInfo.image ? `${API_BASE_URL}/storage/${productInfo.image}` : productInfo.image_url || productInfo.imageUrl
                      };
-                     console.log('Processed product data:', productData); // Debug log
+                    //  console.log('Processed product data:', productData); // Debug log
                      setProduct(productData);
                  } else {
                      console.log('Setting error: Product not found'); // Debug log

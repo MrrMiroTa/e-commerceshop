@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ShoppingCart, User, Search, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { ShoppingCart, User, Search, X, Sun, Moon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/contexts';
 import Menu from "./Menu";
@@ -8,7 +8,34 @@ const Header =  () => {
   const { totalItems, setIsCartOpen } = useCart();
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check for saved theme preference, default to light mode
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -43,6 +70,14 @@ const Header =  () => {
             title="Search"
           >
             {isSearchOpen ? <X size={20} /> : <Search size={20} />}
+          </button>
+
+          <button
+            onClick={toggleDarkMode}
+            className="p-3 rounded-full hover:bg-gray-100 transition"
+            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
           <button

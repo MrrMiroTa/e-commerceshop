@@ -128,7 +128,7 @@ const App = () => {
   return (
     <AppContext.Provider value={appValue}>
       <CartProvider>
-        <div className="min-h-screen bg-gray-50 font-sans antialiased">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans antialiased">
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />

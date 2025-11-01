@@ -1,11 +1,23 @@
-import React from "react";
-import { ShoppingCart, User, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { ShoppingCart, User, Search, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/contexts';
 import Menu from "./Menu";
 
 const Header =  () => {
   const { totalItems, setIsCartOpen } = useCart();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/shop-all?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
@@ -26,10 +38,11 @@ const Header =  () => {
         {/* Icons (Sufficient touch targets on all devices) */}
         <div className="flex items-center space-x-2 sm:space-x-4">
           <button
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
             className="p-3 rounded-full hover:bg-gray-100 transition"
             title="Search"
           >
-            <Search size={20} />
+            {isSearchOpen ? <X size={20} /> : <Search size={20} />}
           </button>
 
           <button
@@ -53,6 +66,30 @@ const Header =  () => {
           </button>
         </div>
       </div>
+
+      {/* Search Bar */}
+      {isSearchOpen && (
+        <div className="border-t border-gray-100 bg-white px-4 sm:px-6 lg:px-8 py-4">
+          <form onSubmit={handleSearch} className="max-w-md mx-auto">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products..."
+                className="w-full pl-4 pr-12 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                autoFocus
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600"
+              >
+                <Search size={16} />
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </header>
   );
 };

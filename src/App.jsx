@@ -13,7 +13,7 @@ import FAQPage from './components/FAQPage';
 import ShippingReturnsPage from './components/ShippingReturnsPage';
 import TermsPrivacyPage from './components/TermsPrivacyPage';
 import CartDrawer from './components/CartDrawer';
-import { AppContext, CartContext } from './components/contexts';
+import { AppContext, CartContext } from './contexts/contexts';
 import { MOCK_PRODUCTS } from './components/mockData';
 
 // --- 3. Cart Provider and Logic ---

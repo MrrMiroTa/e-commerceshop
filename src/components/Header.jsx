@@ -1,7 +1,7 @@
 import React from "react";
 import { ShoppingCart, User, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useCart } from './contexts';
+import { useCart } from '../contexts/contexts';
 import Menu from "./Menu";
 
 const Header =  () => {

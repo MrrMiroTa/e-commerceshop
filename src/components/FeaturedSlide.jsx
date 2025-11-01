@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useApp } from './contexts';
+import { useApp } from '../contexts/contexts';
 import { getFeaturedProduct } from './api';
 
 const FeaturedSlide = () => {

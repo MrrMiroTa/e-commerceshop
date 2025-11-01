@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShoppingCart, Loader2 } from 'lucide-react';
-import { useCart, useApp } from './contexts';
+import { useCart, useApp } from './../contexts/contexts';
 
 const Card = ({ product }) => {
   const { addToCart, isLoading } = useCart();

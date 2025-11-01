@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, ShoppingCart } from 'lucide-react';
-import { useCart } from './contexts';
+import { useCart } from '../contexts/contexts';
 
 const CartDrawer = () => {
     const {

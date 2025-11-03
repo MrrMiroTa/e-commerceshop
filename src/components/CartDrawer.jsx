@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, ShoppingCart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/contexts';
 
 const CartDrawer = () => {
@@ -9,11 +10,14 @@ const CartDrawer = () => {
         cartItems,
         cartTotal,
         updateQuantity,
-        removeFromCart,
-        checkout
+        removeFromCart
     } = useCart();
+    const navigate = useNavigate();
 
-    const handleCheckout = () => { checkout(); };
+    const handleCheckout = () => {
+        setIsCartOpen(false);
+        navigate('/cart');
+    };
 
     // Tailwind classes for drawer visibility and width
     const visibilityClass = isCartOpen

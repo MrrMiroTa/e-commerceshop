@@ -1,14 +1,10 @@
+import LoginPage from "../pages/account/LoginPage";
+
 // --- API Configuration ---
 const API_BASE_URL = 'http://127.0.0.1:8000';
 
 // --- API Functions ---
 const getProducts = async (page = 1, search = '') => {
-  const token = localStorage.getItem('token');
-
-  if (!token) {
-    throw new Error('No authentication token found');
-  }
-
   let url = `${API_BASE_URL}/api/products?page=${page}`;
 
   if (search) {
@@ -17,45 +13,35 @@ const getProducts = async (page = 1, search = '') => {
 
   const response = await fetch(url, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
     }
   });
 
+  console.log('Products API response status:', response.status); // Debug log
+
   if (!response.ok) {
-    if (response.status === 401) {
-      localStorage.removeItem('token');
-      throw new Error('Authentication failed');
-    }
-    throw new Error('Failed to fetch products');
+    const errorText = await response.text();
+    console.log('Products API error response:', errorText); // Debug log
+    throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`);
   }
 
   return await response.json();
 };
 
 const getProduct = async (productId) => {
-  const token = localStorage.getItem('token');
-
-  if (!token) {
-    throw new Error('No authentication token found');
-  }
-
   // console.log('Fetching product with ID:', productId); // Debug log
 
   const response = await fetch(`${API_BASE_URL}/api/products/${productId}`, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
     }
   });
 
   console.log('Product API response status:', response.status); // Debug log
 
   if (!response.ok) {
-    if (response.status === 401) {
-      localStorage.removeItem('token');
-      throw new Error('Authentication failed');
-    }
     if (response.status === 404) {
       throw new Error('Product not found');
     }
@@ -116,24 +102,14 @@ const getAllCategories = async () => {
 };
 
 const getTestimonials = async () => {
-  const token = localStorage.getItem('token');
-
-  if (!token) {
-    throw new Error('No authentication token found');
-  }
-
   const response = await fetch(`${API_BASE_URL}/api/testimonials`, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
     }
   });
 
   if (!response.ok) {
-    if (response.status === 401) {
-      localStorage.removeItem('token');
-      throw new Error('Authentication failed');
-    }
     throw new Error('Failed to fetch testimonials');
   }
 
@@ -147,4 +123,28 @@ const getFeaturedProduct = async () => {
   return allProducts[11];
 };
 
-export { getProducts, getProduct, getAllProducts, getNewArrivals, getProductsByCategory, getAllCategories, getTestimonials, getFeaturedProduct };
+const createOrder = async (orderData) => {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    throw new Error('Authentication required for checkout');
+  }
+
+  const response = await fetch(`${API_BASE_URL}/api/orders`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(orderData)
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to create order');
+  }
+
+  return await response.json();
+};
+
+export { getProducts, getProduct, getAllProducts, getNewArrivals, getProductsByCategory, getAllCategories, getTestimonials, getFeaturedProduct, createOrder };

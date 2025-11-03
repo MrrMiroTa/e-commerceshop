@@ -15,22 +15,35 @@ const LoginPage = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate login API call
-    setTimeout(() => {
-      // Mock user data - in real app, this would come from API
-      const mockUser = {
-        id: 1,
-        name: 'John Doe',
-        email: email,
-        phone: '+1-555-0123',
-        address: '123 Main St, City, State 12345',
-        joinDate: '2023-01-15'
-      };
+    try {
+      // Real API login call
+      const response = await fetch('http://127.0.0.1:8000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
 
-      login(mockUser);
-      navigate('/account');
+      const data = await response.json();
+
+      if (response.ok && data.status === 'success') {
+        // Store user data and token
+        login(data.user, data.token);
+        navigate('/account');
+      } else {
+        alert(data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed. Please try again.');
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

@@ -23,6 +23,12 @@ const Menu = () => {
         Collections
       </Link>
       <Link
+        to="/checkout"
+        className="hover:text-gray-900 transition"
+      >
+        Checkout
+      </Link>
+      <Link
         to="/contact"
         className="hover:text-gray-900 transition"
       >

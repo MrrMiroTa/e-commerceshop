@@ -13,6 +13,8 @@ import FAQPage from './components/FAQPage';
 import ShippingReturnsPage from './components/ShippingReturnsPage';
 import TermsPrivacyPage from './components/TermsPrivacyPage';
 import CartDrawer from './components/CartDrawer';
+import CartPage from './components/CartPage';
+import CheckoutPage from './components/CheckoutPage';
 import AccountPage from './pages/account/AccountPage';
 import LoginPage from './pages/account/LoginPage';
 import RegisterPage from './pages/account/RegisterPage';
@@ -28,14 +30,18 @@ import { MOCK_PRODUCTS } from './components/mockData';
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = (userData) => {
+  const login = (userData, token) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
+    if (token) {
+      localStorage.setItem('token', token);
+    }
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
 
   // Check for existing user session on mount
@@ -181,6 +187,8 @@ const App = () => {
               <Route path="/shipping-returns" element={<ShippingReturnsPage />} />
               <Route path="/terms-privacy" element={<TermsPrivacyPage />} />
               <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />

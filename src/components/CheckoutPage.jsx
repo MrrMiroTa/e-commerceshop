@@ -135,7 +135,7 @@ const CheckoutPage = () => {
               </div>
               <div className="flex items-center">
                 <Truck className="w-4 h-4 mr-2 text-gray-500" />
-                <span className="text-gray-700 dark:text-gray-300">{user.location || 'Not provided'}</span>
+                <span className="text-gray-700 dark:text-gray-300">{user.shipping || 'Not provided'}</span>
               </div>
             </div>
           </div>

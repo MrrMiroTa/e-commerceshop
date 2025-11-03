@@ -23,10 +23,10 @@ const Menu = () => {
         Collections
       </Link>
       <Link
-        to="/checkout"
+        to="/cart"
         className="hover:text-gray-900 transition"
       >
-        Checkout
+        Cart
       </Link>
       <Link
         to="/contact"

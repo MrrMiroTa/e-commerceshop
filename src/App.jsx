@@ -13,8 +13,47 @@ import FAQPage from './components/FAQPage';
 import ShippingReturnsPage from './components/ShippingReturnsPage';
 import TermsPrivacyPage from './components/TermsPrivacyPage';
 import CartDrawer from './components/CartDrawer';
-import { AppContext, CartContext } from './contexts/contexts';
+import AccountPage from './pages/account/AccountPage';
+import LoginPage from './pages/account/LoginPage';
+import RegisterPage from './pages/account/RegisterPage';
+import EditProfilePage from './pages/account/EditProfilePage';
+import OrderHistoryPage from './pages/account/OrderHistoryPage';
+import WishlistPage from './pages/account/WishlistPage';
+import ChangePasswordPage from './pages/account/ChangePasswordPage';
+import { AppContext, CartContext, UserContext } from './contexts/contexts';
 import { MOCK_PRODUCTS } from './components/mockData';
+
+// --- 2. User Provider and Logic ---
+
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
+
+  // Check for existing user session on mount
+  React.useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  const value = {
+    user,
+    login,
+    logout
+  };
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
 
 // --- 3. Cart Provider and Logic ---
 
@@ -127,25 +166,34 @@ const App = () => {
 
   return (
     <AppContext.Provider value={appValue}>
-      <CartProvider>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans antialiased">
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/new-arrivals" element={<NewArrivalsPage />} />
-            <Route path="/shop-all" element={<ShopAllPage />} />
-            <Route path="/collections" element={<CollectionsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/shipping-returns" element={<ShippingReturnsPage />} />
-            <Route path="/terms-privacy" element={<TermsPrivacyPage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-          </Routes>
-          <Footer />
-          <CartDrawer />
-        </div>
-      </CartProvider>
+      <UserProvider>
+        <CartProvider>
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans antialiased">
+            <Header />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/new-arrivals" element={<NewArrivalsPage />} />
+              <Route path="/shop-all" element={<ShopAllPage />} />
+              <Route path="/collections" element={<CollectionsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/shipping-returns" element={<ShippingReturnsPage />} />
+              <Route path="/terms-privacy" element={<TermsPrivacyPage />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/account" element={<AccountPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/account/edit-profile" element={<EditProfilePage />} />
+              <Route path="/account/order-history" element={<OrderHistoryPage />} />
+              <Route path="/account/wishlist" element={<WishlistPage />} />
+              <Route path="/account/change-password" element={<ChangePasswordPage />} />
+            </Routes>
+            <Footer />
+            <CartDrawer />
+          </div>
+        </CartProvider>
+      </UserProvider>
     </AppContext.Provider>
   );
 };

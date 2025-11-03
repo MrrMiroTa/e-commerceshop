@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ShoppingCart, User, Search, X, Sun, Moon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../contexts/contexts';
+import { useCart, useUser } from '../contexts/contexts';
 import Menu from "./Menu";
 
 const Header =  () => {
   const { totalItems, setIsCartOpen } = useCart();
+  const { user } = useUser();
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -80,12 +81,13 @@ const Header =  () => {
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
-          <button
+          <Link
+            to={user ? "/account" : "/login"}
             className="p-3 rounded-full hover:bg-gray-100 transition"
-            title="User Account"
+            title={user ? "My Account" : "Sign In"}
           >
             <User size={20} />
-          </button>
+          </Link>
 
           <button
             onClick={() => setIsCartOpen(true)}

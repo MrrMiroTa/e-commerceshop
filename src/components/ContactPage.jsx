@@ -37,21 +37,21 @@ const ContactPage = () => {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h2>
           <div className="space-y-6">
             <div className="flex items-start space-x-4">
-              <Mail className="w-6 h-6 text-gray-600 mt-1" />
+              <Mail className="w-6 h-6 text-gray-600 mt-6" />
               <div>
                 <h3 className="font-semibold text-gray-900">Email</h3>
-                <p className="text-gray-600">support@uta-shop.com</p>
+                <p className="text-gray-600">mrrmirota@gmail.com</p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
-              <Phone className="w-6 h-6 text-gray-600 mt-1" />
+              <Phone className="w-6 h-6 text-gray-600 mt-6" />
               <div>
                 <h3 className="font-semibold text-gray-900">Phone</h3>
-                <p className="text-gray-600">+1 (555) 123-4567</p>
+                <p className="text-gray-600">+855 (0) 12-345-678</p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
-              <MapPin className="w-6 h-6 text-gray-600 mt-1" />
+              <MapPin className="w-6 h-6 text-gray-600 mt-6" />
               <div>
                 <h3 className="font-semibold text-gray-900">Address</h3>
                 <p className="text-gray-600">123 Commerce Street<br />Business City, BC 12345</p>
@@ -84,7 +84,7 @@ const ContactPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 text-indigo-200 focus:border-gray-900"
                 placeholder="Your full name"
               />
             </div>
@@ -100,7 +100,7 @@ const ContactPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 text-indigo-200 focus:border-gray-900"
                 placeholder="your.email@example.com"
               />
             </div>
@@ -116,7 +116,7 @@ const ContactPage = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 text-indigo-200 focus:border-gray-900"
                 placeholder="How can we help you?"
               />
             </div>
@@ -132,7 +132,7 @@ const ContactPage = () => {
                 onChange={handleChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 text-indigo-200 focus:border-gray-900 resize-none"
                 placeholder="Tell us more about your inquiry..."
               />
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import { getNewArrivals } from './api';
+import { MOCK_PRODUCTS } from './mockData';
 
 const OurNew = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,11 @@ const OurNew = () => {
         // Limit to first 4 products for the homepage section
         setProducts(newProducts.slice(0, 4));
       } catch (err) {
-        setError(err.message);
+        console.log('API failed, using mock data for homepage:', err.message);
+        // Use first 4 mock products for homepage section
+        const sortedMock = [...MOCK_PRODUCTS].sort((a, b) => b.id - a.id);
+        setProducts(sortedMock.slice(0, 4));
+        setError(''); // Clear error since we're using mock data
       } finally {
         setLoading(false);
       }

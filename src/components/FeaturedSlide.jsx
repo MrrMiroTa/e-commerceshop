@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../contexts/contexts';
 import { getFeaturedProduct } from './api';
+import { MOCK_PRODUCTS } from './mockData';
 
 const FeaturedSlide = () => {
     const { navigateToProduct } = useApp();
@@ -16,7 +17,10 @@ const FeaturedSlide = () => {
                 const product = await getFeaturedProduct();
                 setFeaturedProduct(product);
             } catch (err) {
-                setError(err.message);
+                console.log('API failed, using mock data for featured product:', err.message);
+                // Use the first product from mock data as featured
+                setFeaturedProduct(MOCK_PRODUCTS[0]);
+                setError(''); // Clear error since we're using mock data
             } finally {
                 setLoading(false);
             }

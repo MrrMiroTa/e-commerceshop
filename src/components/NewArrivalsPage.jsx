@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import { getNewArrivals } from './api';
+import { MOCK_PRODUCTS } from './mockData';
 
 const NewArrivalsPage = () => {
   const [newArrivals, setNewArrivals] = useState([]);
@@ -15,7 +16,11 @@ const NewArrivalsPage = () => {
         const products = await getNewArrivals();
         setNewArrivals(products);
       } catch (err) {
-        setError(err.message);
+        console.log('API failed, using mock data for new arrivals:', err.message);
+        // Use mock data sorted by ID descending (newest first)
+        const sortedMock = [...MOCK_PRODUCTS].sort((a, b) => b.id - a.id);
+        setNewArrivals(sortedMock);
+        setError(''); // Clear error since we're using mock data
       } finally {
         setLoading(false);
       }

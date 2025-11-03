@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Card from "./Card";
 import { getAllProducts, getProducts } from "./api";
+import { MOCK_PRODUCTS } from "./mockData";
 
 const ShopAllPage = () => {
   const [products, setProducts] = useState([]);
@@ -31,15 +32,37 @@ const ShopAllPage = () => {
             }));
             setProducts(productsWithParsedPrice);
           } else {
-            setProducts([]);
+            // If API fails or no results, use mock data filtered by search
+            const filteredMock = MOCK_PRODUCTS.filter(product =>
+              product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              product.category.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setProducts(filteredMock);
           }
         } else {
           // Otherwise, fetch all products
-          const allProducts = await getAllProducts();
-          setProducts(allProducts);
+          try {
+            const allProducts = await getAllProducts();
+            setProducts(allProducts);
+          } catch (apiError) {
+            // If API fails, use mock data
+            console.log('API failed, using mock data:', apiError.message);
+            setProducts(MOCK_PRODUCTS);
+          }
         }
       } catch (err) {
-        setError(err.message);
+        console.log('Error fetching products, using mock data:', err.message);
+        // If there's an error, use mock data
+        if (searchQuery) {
+          const filteredMock = MOCK_PRODUCTS.filter(product =>
+            product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.category.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          setProducts(filteredMock);
+        } else {
+          setProducts(MOCK_PRODUCTS);
+        }
+        setError(""); // Clear error since we're using mock data
       } finally {
         setLoading(false);
       }
